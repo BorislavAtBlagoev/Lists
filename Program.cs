@@ -1,35 +1,34 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace ListsExercise1
+namespace ListExercise2
 {
     class Program
     {
         static void Main(string[] args)
         {
-
             string inputDigits = Console.ReadLine();
-            SumAdjacentEqualsDigits(inputDigits);
+            GaussSum(inputDigits);
             Console.ReadLine();
-
         }
 
-        static void SumAdjacentEqualsDigits(string inputDigits)
+        static void GaussSum(string inputDigits)
         {
-            var digits = inputDigits.Split(' ').Select(double.Parse).ToList();
+            List<int> digits = inputDigits.Split(' ')
+                               .Select(int.Parse)
+                               .ToList();
 
-            for (int i = 1; i < digits.Count; i++)
+            for (int i = 0; i < digits.Count - 1; i++)
             {
-                if (digits[i] == digits[i - 1])
-                {
-                    digits[i] += digits[i - 1];
-                    digits.RemoveAt(i - 1);
-                    i = 0;
-                }
+
+                digits[i] += digits[digits.Count - 1];
+                digits.RemoveAt(digits.Count - 1);
+
             }
 
             Console.WriteLine(string.Join(" ", digits));
+
         }
 
     }
